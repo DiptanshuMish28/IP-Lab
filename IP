@@ -207,3 +207,48 @@ app.listen(port, () => {
 </html>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+Event Handling in React
+
+import React, { useState } from 'react';
+
+function EventHandling() {
+  const [message, setMessage] = useState('Hover over me');
+  const [inputValue, setInputValue] = useState('');
+
+  const handleMouseEnter = () => {
+    setMessage('Mouse entered!');
+  };
+
+  const handleMouseLeave = () => {
+    setMessage('Mouse left!');
+  };
+
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <div>
+      <h2>Event Handling in React</h2>
+      <div
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{ padding: '20px', backgroundColor: 'lightgray', cursor: 'pointer' }}
+      >
+        {message}
+      </div>
+      <br />
+      <input
+        type="text"
+        placeholder="Type something"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <p>You typed: {inputValue}</p>
+    </div>
+  );
+}
+
+export default EventHandling;
+/////////////////////////////////////////////////////////////
