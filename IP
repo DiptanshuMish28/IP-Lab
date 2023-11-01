@@ -1,0 +1,87 @@
+const fs=require('fs');
+
+function readFile()
+{
+    try{
+        const data=fs.readFileSync('nonExistentFile.txt','utf8');
+        console.log('Data Read from the file',data);
+      }
+      catch(error){
+        console.error('An error occured while reading the file:',error.message);
+      }
+}
+
+readFile();
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Custom Hooks
+
+import { useState } from 'react';
+
+function useCounter(initialValue = 0) {
+  const [count, setCount] = useState(initialValue);
+
+  const increment = () => {
+    setCount(count + 1);
+  };
+
+  const decrement = () => {
+    setCount(count - 1);
+  };
+
+  return {
+    count,
+    increment,
+    decrement,
+  };
+}
+
+export default useCounter;
+
+
+import React from 'react';
+import useCounter from './useCounter'; // Import the custom hook
+
+function CounterComponent() {
+  const counter = useCounter(0);
+
+  return (
+    <div>
+      <h2>Counter: {counter.count}</h2>
+      <button onClick={counter.increment}>Increment</button>
+      <button onClick={counter.decrement}>Decrement</button>
+    </div>
+  );
+}
+
+export default CounterComponent;
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+File Handling
+
+const fs = require('fs'); // Import the 'fs' module
+
+// Define the file path
+const filePath = 'sample.txt';
+
+// Create a new file
+fs.writeFileSync(filePath, 'Hello, World!', 'utf8');
+console.log('File created: sample.txt');
+
+// Read the file
+const data = fs.readFileSync(filePath, 'utf8');
+console.log('File content:', data);
+
+// Modify (write to) the file
+const newText = 'Updated content';
+fs.writeFileSync(filePath, newText, 'utf8');
+console.log('File modified.');
+
+// Append to the file
+const appendText = '\nAppended content';
+fs.appendFileSync(filePath, appendText, 'utf8');
+console.log('Content appended.');
+
+// Read the file after modification
+const updatedData = fs.readFileSync(filePath, 'utf8');
+console.log('Updated content:', updatedData);
