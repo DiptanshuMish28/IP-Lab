@@ -155,3 +155,55 @@ genericAnimal.speak(); // Generic Animal makes a sound
 myDog.speak(); // Buddy makes a sound
 myDog.bark(); // Buddy barks
 ////////////////////////////////////////////////////////////////////
+form using express
+
+const express = require('express');
+const app = express();
+const port = 3000;
+
+// Middleware to parse form data
+app.use(express.urlencoded({ extended: false }));
+
+// Serve static files (e.g., CSS, images)
+app.use(express.static('public'));
+
+// Define a route to serve the login form
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/login.html');
+});
+
+// Handle form submission
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // You can implement authentication logic here
+  // For this example, we'll just display the submitted data
+  res.send(`Received: Username - ${username}, Password - ${password}`);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+------------------------
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login Form</title>
+</head>
+<body>
+  <h1>Login</h1>
+  <form action="/login" method="POST">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <input type="submit" value="Submit">
+  </form>
+</body>
+</html>
+
+////////////////////////////////////////////////////////////////////////////////////////////////
